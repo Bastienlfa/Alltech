@@ -1,0 +1,24 @@
+.col-lg-1 {
+    background-color: red;
+}
+
+.col-lg-11 {
+    background-color: yellow;
+}
+
+.red {
+    background-color: green;
+}
+
+.col-lg-1 {
+    overflow: auto;
+}
+
+@font-face {
+    font-family: "french";
+    src: url("police/zoulou.ttf") format('truetype');
+}
+
+header {
+    font-family: "french";
+}
