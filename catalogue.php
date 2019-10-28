@@ -3,6 +3,7 @@
 include 'header.php';
 include 'sidebar.php';
 
+
 try {
 
     $bdd = new PDO('mysql:host=localhost;port=3308;dbname=alltech','root','');
@@ -23,10 +24,12 @@ try {
         ?> 
         <h2><?php echo $donnees['nom'];?></h2><br/>
         <h5><?php echo $donnees['description'];?></h5> <br/> 
-        <h4> <?php echo $donnees['prix'];?></h4> <br/>
-        <a href="panier.php?action=ajout&amp;l=<?php echo $donnees['nom'];?> &amp;q=1;?>&amp;p=<?php echo $donnees['prix'];?> &amp;">Ajouter au panier</a> <?php
+        <h4> <?php echo $donnees['prix'];?></h4> <br/> 
+        <a href="panier.php?action=ajout&amp;l=<?php echo $donnees['nom'];?> &amp;q=1 &amp;p=<?php echo $donnees['prix'];?>">Ajouter au panier</a>
+         <?php
         
     }
+
 }
 
 else 

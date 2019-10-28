@@ -1,16 +1,9 @@
-<?php
+<?php 
+
 
 function creationPanier(){
 
-    try{
-
-        $bdd = new PDO('mysql:host=localhost;port=3308;dbname=alltech','root','');
-
-    }
-    catch (PDOException $e) {
-
-        echo 'Connexion échouée : ' . $e->getMessage();
-    }
+    
 
     if(!isset($_SESSION['panier'])){
 
@@ -27,6 +20,7 @@ function creationPanier(){
 
 }
 
+
 function ajouterproduit($libelleproduit,$qteproduit,$prixproduit){
 
     if(creationPanier() && !isverouille()){
@@ -35,7 +29,7 @@ function ajouterproduit($libelleproduit,$qteproduit,$prixproduit){
 
         if($position_produit !== false){
 
-            $_SESSION['panier']['libelleproduit'][$position_produit] += $qteproduit;
+            $_SESSION['panier']['qteproduit'][$position_produit] += $qteproduit;
         }
 
         else{
@@ -44,7 +38,7 @@ function ajouterproduit($libelleproduit,$qteproduit,$prixproduit){
             array_push($_SESSION['panier']['prixproduit'],$prixproduit);
         }
 
-    } else {
+    }   else {
 
         echo 'erreur veuillezcontacter admin';
     }
@@ -60,13 +54,13 @@ function modifierqteproduit($libelleproduit,$qteproduit){
 
             if($position_produit!==false){
 
-                $_SESSION['panier']['produit'][$position_produit] = $qteproduit;
+                $_SESSION['panier']['qteproduit'][$position_produit] = $qteproduit;
 
 
             }
 
 
-        } else{ supprimerproduit($libelleproduit);
+     } else{ supprimerproduit($libelleproduit);
 
         }
     } else {
@@ -81,7 +75,7 @@ function modifierqteproduit($libelleproduit,$qteproduit){
 
 function isverouille(){
     
-    if(isset($_SESSION['panier']) && $_SESSION['isverouille']){
+    if (isset($_SESSION['panier']) && $_SESSION['panier']['verrou']) {
 
         return true;
 
@@ -125,22 +119,32 @@ function supprimerproduit($libelleproduit){
         $tmp['qteproduit']=array();
         $tmp['prixproduit']=array();
         $tmp['verrou']= $_SESSION['panier']['verrou'];
+        
+        if(isset($_SESSION['panier'][$libelleproduit])){
+            unset($_SESSION['panier'][$libelleproduit]);
 
         for($i=0;$i<count($_SESSION['panier']['libelleproduit']);$i++){
 
             if($_SESSION['panier']['libelleproduit'][$i !== $libelleproduit]){
 
-            array_push($_SESSION['panier']['libelleproduit'],$_SESSION['panier']['libelleproduit'][$i]);
-            array_push($_SESSION['panier']['qteproduit'],$_SESSION['panier']['qteproduit'][$i]);
-            array_push($_SESSION['panier']['prixproduit'],$_SESSION['panier']['prixproduit'][$i]);
-
-            }
+            array_push($tmp['libelleproduit'],$_SESSION['panier']['libelleproduit'][$i]);
+            array_push($tmp['qteproduit'],$_SESSION['panier']['qteproduit'][$i]);
+            array_push($tmp['prixproduit'],$_SESSION['panier']['prixproduit'][$i]);
+            
+            
         }
+        
+        } 
+     
 
         $_SESSION['panier']=$tmp;
         unset($tmp);
-    } else {
-        echo'ma bite';
+
+    } 
+
+
+    
+    //// echo'ma bite';
     }
 
     }
