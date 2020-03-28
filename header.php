@@ -36,9 +36,8 @@ if(!isset($_SESSION['nom']))
         <li><a href="index.php">Accueil</a></li>
         <li><a href="inscription.php">S'inscrire</a></li>
         <li><a href="Connexion.php">Se Connecter</a></li>
-        <li><a href="#">Panier</a></li>
         <li><a href="catalogue.php">Notre catalogue</a></li>
-        <li><a href="#">Devenir franchisé</a></li>
+        <li><a href="demande-franchise.php">Devenir franchisé</a></li>
     </ul>
 </header>
 <body>
